@@ -55,7 +55,7 @@ O projeto será implantado em uma plataforma gratuita como Heroku ou Render, usa
 ## 👨‍💼 Autores
 
 | [<img src="https://avatars.githubusercontent.com/u/84105268?v=4" width="100px;" alt="Yuri Amaral Santos Rocha"/><br/><sub><b>Yuri Amaral Santos Rocha</b></sub>](https://github.com/yuriamaralSR) |
-| :---: |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 
 ---
 
