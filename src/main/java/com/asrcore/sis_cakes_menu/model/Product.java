@@ -2,7 +2,7 @@ package com.asrcore.sis_cakes_menu.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -17,18 +17,18 @@ public class Product {
     @NotNull
     private String name;
     private String description;
-    @PositiveOrZero
+    @Positive
     private BigDecimal price;
-    private int quantityStock;
+    private int quantity;
 
     public Product() {
     }
 
-    public Product(String name, String description, BigDecimal price, int quantityStock) {
+    public Product(String name, String description, BigDecimal price, int quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.quantityStock = quantityStock;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -47,8 +47,24 @@ public class Product {
         return price;
     }
 
-    public int getQuantityStock() {
-        return quantityStock;
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setName(String name) {
+        this.name = name.trim();
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Override
@@ -70,7 +86,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", quantityStock=" + quantityStock +
+                ", quantityStock=" + quantity +
                 '}';
     }
 }
