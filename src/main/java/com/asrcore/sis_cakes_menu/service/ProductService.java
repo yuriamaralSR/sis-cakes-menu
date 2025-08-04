@@ -56,7 +56,7 @@ public class ProductService {
         if (id == null) {
             throw new InconsistentDataException("Product id is null.");
         }
-        Product productToUpdate = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Unable update Product."));
+        Product productToUpdate = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Unable update product."));
         if (product.getName() == null || product.getName().isEmpty()) {
             throw new InconsistentDataException("Product name cannot be empty.");
         }
