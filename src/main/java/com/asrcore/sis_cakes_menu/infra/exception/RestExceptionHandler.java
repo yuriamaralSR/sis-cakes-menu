@@ -1,7 +1,5 @@
-package com.asrcore.sis_cakes_menu.infra;
+package com.asrcore.sis_cakes_menu.infra.exception;
 
-import com.asrcore.sis_cakes_menu.exception.InconsistentDataException;
-import com.asrcore.sis_cakes_menu.exception.ProductNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

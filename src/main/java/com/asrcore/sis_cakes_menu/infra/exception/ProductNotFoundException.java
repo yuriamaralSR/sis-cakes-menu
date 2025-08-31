@@ -1,4 +1,4 @@
-package com.asrcore.sis_cakes_menu.exception;
+package com.asrcore.sis_cakes_menu.infra.exception;
 
 public class ProductNotFoundException extends RuntimeException {
 

@@ -1,7 +1,7 @@
 package com.asrcore.sis_cakes_menu.service;
 
-import com.asrcore.sis_cakes_menu.exception.InconsistentDataException;
-import com.asrcore.sis_cakes_menu.exception.ProductNotFoundException;
+import com.asrcore.sis_cakes_menu.infra.exception.InconsistentDataException;
+import com.asrcore.sis_cakes_menu.infra.exception.ProductNotFoundException;
 import com.asrcore.sis_cakes_menu.model.Product;
 import com.asrcore.sis_cakes_menu.repository.ProductRepository;
 import jakarta.transaction.Transactional;
