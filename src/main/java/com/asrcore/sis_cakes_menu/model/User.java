@@ -2,6 +2,8 @@ package com.asrcore.sis_cakes_menu.model;
 
 import com.asrcore.sis_cakes_menu.model.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +19,12 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String login;
     private String name;
+    @NotBlank
     private String password;
+    @NotNull
     private UserRole role;
 
     public User() {

@@ -1,6 +1,6 @@
 package com.asrcore.sis_cakes_menu.controller;
 
-import com.asrcore.sis_cakes_menu.model.dto.AutheticationDTO;
+import com.asrcore.sis_cakes_menu.model.dto.AuthenticationDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +21,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AutheticationDTO data) {
+    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
