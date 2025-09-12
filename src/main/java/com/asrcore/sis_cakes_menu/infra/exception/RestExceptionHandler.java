@@ -1,6 +1,7 @@
 package com.asrcore.sis_cakes_menu.infra.exception;
 
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,43 +22,55 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    private ResponseEntity<ErrorResponse> ProductNotFoundHandler(ProductNotFoundException exception) {
+    private ResponseEntity<ErrorResponse> productNotFoundHandler(ProductNotFoundException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Not found", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
-    private ResponseEntity<ErrorResponse> UsernameNotFoundHandler(UsernameNotFoundException exception) {
+    private ResponseEntity<ErrorResponse> usernameNotFoundHandler(UsernameNotFoundException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Unauthorized", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(DuplicateLoginException.class)
+    private ResponseEntity<ErrorResponse> duplicateLoginHandler(DuplicateLoginException exception) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.CONFLICT.value(), "Conflict", exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
-    private ResponseEntity<ErrorResponse>  BadCredentialsHandler(BadCredentialsException exception) {
+    private ResponseEntity<ErrorResponse>  badCredentialsHandler(BadCredentialsException exception) {
         ErrorResponse error = new  ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Unauthorized", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(SQLException.class)
-    private ResponseEntity<ErrorResponse> SQLErrorHandler(SQLException exception) {
+    private ResponseEntity<ErrorResponse> sQLErrorHandler(SQLException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    private ResponseEntity<ErrorResponse> dataIntegrityViolationHandler(DataIntegrityViolationException exception) {
+        ErrorResponse error = new  ErrorResponse(HttpStatus.CONFLICT.value(), "Conflict", exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
-    private ResponseEntity<ErrorResponse> ConstraintViolationHandler(ConstraintViolationException exception) {
+    private ResponseEntity<ErrorResponse> constraintViolationHandler(ConstraintViolationException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Bad Request", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    private ResponseEntity<ErrorResponse> RunTimeErrorHandler(RuntimeException exception) {
+    private ResponseEntity<ErrorResponse> runTimeErrorHandler(RuntimeException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
-    private ResponseEntity<ErrorResponse> ExceptionHandler(Exception exception) {
+    private ResponseEntity<ErrorResponse> exceptionHandler(Exception exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error", exception.getMessage());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
