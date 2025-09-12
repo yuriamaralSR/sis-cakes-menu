@@ -20,11 +20,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Column(unique = true, nullable = false)
     private String login;
+    @Column(nullable = false)
     private String name;
     @NotBlank
+    @Column(nullable = false)
     private String password;
     @NotNull
+    @Column(nullable = false)
     private UserRole role;
 
     public User() {
