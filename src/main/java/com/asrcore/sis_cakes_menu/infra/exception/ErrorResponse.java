@@ -1,4 +1,4 @@
-package com.asrcore.sis_cakes_menu.infra;
+package com.asrcore.sis_cakes_menu.infra.exception;
 
 public class ErrorResponse {
     private int status;

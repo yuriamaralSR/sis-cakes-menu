@@ -1,0 +1,27 @@
+package com.asrcore.sis_cakes_menu.service;
+
+import com.asrcore.sis_cakes_menu.model.User;
+import com.asrcore.sis_cakes_menu.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthenticationService implements UserDetailsService {
+
+    private UserRepository userRepository;
+
+    public AuthenticationService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails user = userRepository.findByLogin(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with login: " + username);
+        }
+        return user;
+    }
+}
