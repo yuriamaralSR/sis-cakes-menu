@@ -24,6 +24,8 @@ public class User implements UserDetails {
     private String login;
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String phoneNumber;
     @NotBlank
     @Column(nullable = false)
     private String password;
@@ -34,9 +36,10 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String login, String name, String password, UserRole role) {
+    public User(String login, String name, String phoneNumber, String password, UserRole role) {
         this.login = login;
         this.name = name;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.role = role;
     }
@@ -86,6 +89,14 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
