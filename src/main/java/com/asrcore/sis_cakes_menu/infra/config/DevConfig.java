@@ -20,7 +20,7 @@ public class DevConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         String encryptedPassword = new BCryptPasswordEncoder().encode("admin");
-        User admin = new User("admin", "user admin", encryptedPassword, UserRole.ADMIN);
+        User admin = new User("admin", "user admin", "000000000", encryptedPassword,  UserRole.ADMIN);
 
         userRepository.save(admin);
     }

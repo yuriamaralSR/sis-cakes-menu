@@ -5,13 +5,12 @@ import com.asrcore.sis_cakes_menu.model.dto.UserResponseDTO;
 import com.asrcore.sis_cakes_menu.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("api")
 public class UserController {
 
     private UserService userService;
@@ -25,5 +24,10 @@ public class UserController {
         UserResponseDTO newUser = userService.registerUser(data);
 
         return ResponseEntity.ok(newUser);
+    }
+
+    @GetMapping("/users")
+    public List<UserResponseDTO> getAllUsers() {
+        return userService.getAllUsers();
     }
 }
