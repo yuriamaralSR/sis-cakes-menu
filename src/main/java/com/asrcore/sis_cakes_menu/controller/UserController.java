@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/users")
 public class UserController {
 
     private UserService userService;
@@ -26,8 +26,9 @@ public class UserController {
         return ResponseEntity.ok(newUser);
     }
 
-    @GetMapping("/users")
-    public List<UserResponseDTO> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+        List<UserResponseDTO> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 }
