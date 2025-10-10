@@ -9,6 +9,7 @@ import com.asrcore.sis_cakes_menu.model.dto.UserResponseDTO;
 import com.asrcore.sis_cakes_menu.model.dto.UserUpdateDTO;
 import com.asrcore.sis_cakes_menu.model.enums.UserRole;
 import com.asrcore.sis_cakes_menu.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public UserResponseDTO registerUser(RegisterDTO RegisterData) {
         if (this.userRepository.findByLogin(RegisterData.login()) != null) {
            throw new DuplicateLoginException("This login " +  RegisterData.login() + " is already in use.");
@@ -45,5 +47,16 @@ public class UserService {
             usersResponse.add(new UserResponseDTO(user.getId(), user.getLogin(), user.getName(), user.getPhoneNumber(), user.getRole()));
         }
         return  usersResponse;
+    }
+
+    @Transactional
+    public void deleteUserById(Long id) {
+        if (id == null) {
+            throw new InconsistentDataException("User id is null.");
+        }
+        if (userRepository.findById(id).isEmpty()) {
+            throw new UserNotFoundException("Unable to delete user.");
+        }
+        userRepository.deleteById(id);
     }
 }

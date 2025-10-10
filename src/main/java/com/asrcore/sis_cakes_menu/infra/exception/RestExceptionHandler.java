@@ -27,6 +27,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    private ResponseEntity<ErrorResponse> userNotFoundHandler(UserNotFoundException exception) {
+        ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Not found", exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(UsernameNotFoundException.class)
     private ResponseEntity<ErrorResponse> usernameNotFoundHandler(UsernameNotFoundException exception) {
         ErrorResponse error = new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Unauthorized", exception.getMessage());
