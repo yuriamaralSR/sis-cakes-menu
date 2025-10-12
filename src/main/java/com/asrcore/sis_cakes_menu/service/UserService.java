@@ -52,6 +52,22 @@ public class UserService {
         return  usersResponse;
     }
 
+    public UserResponseDTO getUserById(Long id) {
+        if (id == null) {
+            throw new UserNotFoundException("User id is null");
+        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new AccessDeniedException("Unauthenticated user.");
+        }
+        String currentLogin = authentication.getName();
+        User user = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        if (!currentLogin.equals(user.getLogin()) && authentication.getAuthorities().stream().noneMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"))) {
+            throw new AccessDeniedException("Unauthorized user.");
+        }
+        return new UserResponseDTO(user.getId(), user.getLogin(), user.getName(), user.getPhoneNumber(), user.getRole());
+    }
+
     @Transactional
     public void deleteUserById(Long id) {
         if (id == null) {
