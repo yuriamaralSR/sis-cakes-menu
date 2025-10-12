@@ -4,6 +4,7 @@ import com.asrcore.sis_cakes_menu.model.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,7 @@ public class User implements UserDetails {
     private String phoneNumber;
     @NotBlank
     @Column(nullable = false)
+    @Size(min = 8)
     private String password;
     @NotNull
     @Column(nullable = false)
