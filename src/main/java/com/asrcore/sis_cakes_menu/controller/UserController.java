@@ -2,6 +2,7 @@ package com.asrcore.sis_cakes_menu.controller;
 
 import com.asrcore.sis_cakes_menu.model.dto.RegisterDTO;
 import com.asrcore.sis_cakes_menu.model.dto.UserResponseDTO;
+import com.asrcore.sis_cakes_menu.model.dto.UserUpdateDTO;
 import com.asrcore.sis_cakes_menu.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,11 @@ public class UserController {
     public ResponseEntity deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> updateUserById(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO data) {
+        UserResponseDTO updatedUser = userService.updateUser(id, data);
+        return ResponseEntity.ok(updatedUser);
     }
 }
